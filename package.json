@@ -1,0 +1,48 @@
+{
+  "name": "cimet-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/app.ts",
+  "scripts": {
+    "start": "ts-node-dev --respawn --transpile-only ./src/app.ts",
+    "test": "jest --testTimeout=5000 --coverage --maxWorkers=1 --forceExit",
+    "tsc": "tsc",
+    "prod": "tsc && node ./build/app.js",
+    "build": "echo This is a static template, there is no bundler or bundling involved!",
+    "migrate:latest": "knex migrate:latest --knexfile knexfile.js",
+    "migrate:down": "knex migrate:down --knexfile knexfile.js  "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codesandbox-app/static-template.git"
+  },
+  "keywords": [],
+  "author": "Ives van Hoorne",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codesandbox-app/static-template/issues"
+  },
+  "homepage": "https://github.com/codesandbox-app/static-template#readme",
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "@types/knex": "^0.16.1",
+    "@types/sqlite3": "^3.1.11",
+    "bcrypt": "5.1.1",
+    "express": "^4.18.2",
+    "knex": "^3.1.0",
+    "nodemon": "^2.0.20",
+    "sqlite3": "^5.1.7",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/jest": "^29.5.12",
+    "@types/supertest": "^6.0.2",
+    "jest": "^29.7.0",
+    "supertest": "^6.3.4",
+    "ts-jest": "^29.1.2"
+  }
+}

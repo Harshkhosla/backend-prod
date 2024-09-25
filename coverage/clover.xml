@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1711093631841" clover="3.2.0">
+  <project timestamp="1711093631841" name="All files">
+    <metrics statements="31" coveredstatements="28" conditionals="2" coveredconditionals="0" methods="6" coveredmethods="5" elements="39" coveredelements="33" complexity="0" loc="31" ncloc="31" packages="3" files="4" classes="4"/>
+    <package name="workspace">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="knexfile.ts" path="/workspace/knexfile.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="workspace.src">
+      <metrics statements="16" coveredstatements="16" conditionals="1" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="db.ts" path="/workspace/src/db.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+      </file>
+      <file name="index.ts" path="/workspace/src/index.ts">
+        <metrics statements="12" coveredstatements="12" conditionals="1" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="16" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="workspace.src.rest">
+      <metrics statements="13" coveredstatements="10" conditionals="1" coveredconditionals="0" methods="3" coveredmethods="2"/>
+      <file name="index.ts" path="/workspace/src/rest/index.ts">
+        <metrics statements="13" coveredstatements="10" conditionals="1" coveredconditionals="0" methods="3" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
