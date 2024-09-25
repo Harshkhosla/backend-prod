@@ -28,7 +28,7 @@ const options = {
       },
     ],
   },
-  apis: ["./src/rest/*"],
+  apis: ["./src/rest/*", "./src/author/*.ts"],
 };
 
 const app = createApp();
