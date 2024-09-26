@@ -139,3 +139,75 @@ describe("DELETE API for Users", () => {
     expect(res.body.error).toBe("User not found");
   });
 });
+
+describe("Create Author-Book Relationship", () => {
+  test("POST /author/author_books - should insert an author-book relationship", async () => {
+    const newRelationship = { author_id: 2, book_id: 3 };
+
+    const res = await request(app)
+      .post("/author/author_books")
+      .send(newRelationship)
+      .set("x-api-key", "HARSH123");
+
+    expect(res.status).toEqual(201);
+    expect(res.body.data[0]).toHaveProperty("author_id", 2);
+    expect(res.body.data[0]).toHaveProperty("book_id", 3);
+  });
+
+  test("POST /author/author_books - should return 500 if insertion fails", async () => {
+    const newRelationship = { author_id: null, book_id: 2 };
+
+    const res = await request(app)
+      .post("/author/author_books")
+      .send(newRelationship)
+      .set("x-api-key", "HARSH123");
+
+    expect(res.status).toEqual(500);
+    expect(res.body).toHaveProperty(
+      "error",
+      "Error adding author-book relationship"
+    );
+  });
+});
+
+describe("Get Books by Author", () => {
+  test("GET /author/author_books/author/:author_id/books - should retrieve books by a specific author", async () => {
+    const res = await request(app)
+      .get("/author/author_books/author/1/books")
+      .set("x-api-key", "HARSH123");
+
+    expect(res.status).toEqual(200);
+    expect(Array.isArray(res.body.data)).toBeTruthy();
+    expect(res.body.data.length).toBeGreaterThan(0);
+  });
+
+  test("GET /author/author_books/author/:author_id/books - should return 404 if no books found", async () => {
+    const res = await request(app)
+      .get("/author/author_books/author/999/books")
+      .set("x-api-key", "HARSH123");
+
+    expect(res.status).toEqual(404);
+    expect(res.body).toHaveProperty("error", "No books found for this author");
+  });
+});
+
+describe("Get Authors by Book", () => {
+  test("GET /author/author_books/book/:book_id/authors - should retrieve authors by a specific book", async () => {
+    const res = await request(app)
+      .get("/author/author_books/book/1/authors")
+      .set("x-api-key", "HARSH123");
+
+    expect(res.status).toEqual(200);
+    expect(Array.isArray(res.body.data)).toBeTruthy();
+    expect(res.body.data.length).toBeGreaterThan(0); // Assuming there are authors
+  });
+
+  test("GET /author/author_books/book/:book_id/authors - should return 404 if no authors found", async () => {
+    const res = await request(app)
+      .get("/author/author_books/book/999/authors")
+      .set("x-api-key", "HARSH123"); // Book with ID 999 doesn't exist
+
+    expect(res.status).toEqual(404);
+    expect(res.body).toHaveProperty("error", "No authors found");
+  });
+});

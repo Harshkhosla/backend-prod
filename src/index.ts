@@ -13,7 +13,7 @@ app.use("/author", author);
 app.get("/", function (_req, res) {
   res.json({ data: "Read the README.md!" });
 });
-// todo - add more routes
+
 
 export const createApp = (port = 3000) => {
   app.listen(port, function () {
