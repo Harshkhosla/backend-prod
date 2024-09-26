@@ -34,6 +34,12 @@ router.get("/demo/:id", async (req, res) => {
   return res.json({ data });
 });
 
+// I have changed  the schema of the users as i have added the password
+// as a extra field and did alos implemented the hashing of the password
+// before storing it and have added all the test cases in the test file
+// and checked them before
+
+
 /**
  * @openapi
  * /rest/users:
