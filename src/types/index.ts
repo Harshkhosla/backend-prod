@@ -10,3 +10,11 @@ export const userSchema = z.object({
   email: z.string().email("Invalid email address"),
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
+
+
+
+export const UserupdateSchema= z.object({
+  email:z.string().min(4,"Email should be of more than 4 words").optional(),
+  gender:z.string().min(4,"Gender should be of more than 4 words").optional(),
+  age: z.number().int("Age must be an integer").positive("Age must be a positive number").optional(),
+})

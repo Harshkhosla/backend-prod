@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 const userTable = "users";
 import { apiKeyMiddleware } from "../middleware/authMiddleware";
 import { logMiddleware } from "../middleware/logMiddleware";
-import { userSchema } from "../types/index";
+import { userSchema,UserupdateSchema } from "../types/index";
 
 router.use(apiKeyMiddleware);
 router.use(logMiddleware);
@@ -87,7 +87,7 @@ router.post("/users", async (req, res) => {
   }
 
   const { givenName, familyName, firstName, lastName, email, password } =
-    req.body;
+  parseResult.data;
 
   const userFirstName = givenName || firstName;
   const userLastName = familyName || lastName;
@@ -163,8 +163,14 @@ router.get("/users/:id", async (req, res) => {
  *         description: Error retrieving users
  */
 router.get("/users", async (_req, res) => {
+  
   try {
     const users = await knex(userTable).select();
+
+    if (!users) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
 
     return res.status(200).json({ data: users });
   } catch (err) {
@@ -202,27 +208,42 @@ router.get("/users", async (_req, res) => {
  *         description: User updated successfully
  *       404:
  *         description: User not found
- */
-router.put("/users/:id", async (req, res) => {
-  const { id } = req.params;
-  const { email, gender, age } = req.body;
-
-  try {
-    const updatedUser = await knex(userTable).where({ id }).update({
-      email,
-      gender,
-      age,
-    });
-
-    if (!updatedUser) {
-      return res.status(404).json({ error: "User not found" });
+  */
+  router.put("/users/:id", async (req, res) => {
+    //  console.log("PUT /users/:id route hit"); 
+    const { id } = req.params;
+    console.log(id);
+    
+    const parseResult = UserupdateSchema.safeParse(req.body)
+    
+    if (!parseResult.success) {
+      // console.error("Validation Errors: ", parseResult);
+      return res.status(400).json({
+        error: "Validation error",
+        details: parseResult.error.errors,
+      });
     }
+    const { email, gender, age } = parseResult.data;
+    // console.log(email);
+    const updateFields: Partial<{ email: string; gender: string; age: number }> = {};
+    if (email) updateFields.email = email;
+    if (gender) updateFields.gender = gender;
+    if (age !== undefined) updateFields.age = age;
+    
+    try {
+      const updatedUser = await knex(userTable).where({ id }).update(
+        updateFields
+      );
 
-    return res.status(200).json({ message: "User updated successfully" });
-  } catch (err) {
-    return res.status(500).json({ error: "Error updating user" });
-  }
-});
+      if (!updatedUser) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      return res.status(200).json({ message: "User updated successfully" });
+    } catch (err) {
+      return res.status(500).json({ error: "Error updating user" });
+    }
+  });
 
 /**
  * @openapi
